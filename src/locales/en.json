@@ -1,0 +1,71 @@
+{
+  "hero_title": "OSEL - The remote custom-made platform",
+  "hero_subtitle": "Connect the diaspora with local artisans with confidence and safety.",
+  "hero_button": "Discover OSEL",
+  "interactions": {
+    "title": "How OSEL transforms interactions",
+    "cards": [
+      {
+        "title": "Morphological information transfer",
+        "description": "Thanks to body scanning, measurements are standardized and directly usable by tailors, reducing errors in garment making."
+      },
+      {
+        "title": "Visualization and virtual fitting",
+        "description": "Customers can see their clothes on a 3D avatar before finalizing the order, improving accuracy and satisfaction."
+      },
+      {
+        "title": "Secure transactions",
+        "description": "A reliable and formalized payment system minimizes financial risks and disputes between the diaspora and artisans."
+      },
+      {
+        "title": "Transparent logistic tracking",
+        "description": "Delivery is tracked in real time, reducing uncertainty and enhancing the overall customer experience."
+      }
+    ]
+  }, 
+  "benefits": {
+    "title": "OSEL's Benefits",
+    "cards": [
+      {
+        "title": "Increased customer confidence",
+        "description": "With assisted measurements, body modeling and virtual fitting, OSEL reduces concerns about remote clothing purchases, enhancing customer confidence."
+      },
+      {
+        "title": "Simplified and secure process for the diaspora",
+        "description": "OSEL formalizes orders with a structured framework, transparent information, secure payment and rigorous tracking, minimizing financial risk and logistic stress."
+      },
+      {
+        "title": "Visibility and access to international market for artisans",
+        "description": "Tailors can showcase their creations on a digital platform, build credibility via client reviews and reach customers they couldn't individually."
+      },
+      {
+        "title": "Error reduction and quality improvement",
+        "description": "Standardized measurements, clear patterns and formalized ordering processes allow artisans to work with fewer uncertainties, reducing alterations and optimizing time and costs."
+      }
+    ]
+  }, 
+  "techArtisan": {
+    "title": "Technology and Craftsmanship",
+    "cards": [
+      {
+        "title": "Innovative Technology",
+        "description": "OSEL uses body measurement capture, 3D modeling, and virtual fitting to improve order accuracy and customer satisfaction."
+      },
+      {
+        "title": "Artisanal Expertise",
+        "description": "Malagasy tailors bring their expertise, creativity, and artisan tradition to ensure unique, custom-made, high-quality garments."
+      }
+    ]
+  }, 
+  "footer": {
+    "title": "Join the OSEL journey",
+    "description": "Contribute to the development of Malagasy craftsmanship and discover unique, custom-made, high-quality creations.",
+    "copyright": "All rights reserved."
+  }, 
+  "navbar": {
+    "home": "Home",
+    "interactions": "Interactions",
+    "benefits": "Benefits",
+    "techArtisan": "Relationship"
+  }
+}

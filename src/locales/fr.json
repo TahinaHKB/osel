@@ -1,0 +1,71 @@
+{
+  "hero_title": "OSEL - La plateforme du sur-mesure à distance",
+  "hero_subtitle": "Connectez la diaspora aux artisans locaux avec confiance et sécurité.",
+  "hero_button": "Découvrir OSEL",
+  "interactions": {
+    "title": "Comment OSEL transforme les interactions",
+    "cards": [
+      {
+        "title": "Transmission d'informations morphologiques",
+        "description": "Grâce au scan corporel, les mensurations sont standardisées et directement utilisables par les couturiers, réduisant les erreurs de confection."
+      },
+      {
+        "title": "Visualisation et essayage virtuel",
+        "description": "Les clients peuvent voir leurs vêtements sur un avatar 3D avant de finaliser la commande, améliorant la précision et la satisfaction."
+      },
+      {
+        "title": "Transactions sécurisées",
+        "description": "Un système de paiement fiable et formalisé minimise les risques financiers et les litiges entre la diaspora et les artisans."
+      },
+      {
+        "title": "Suivi logistique transparent",
+        "description": "La livraison est suivie en temps réel, réduisant l'incertitude et améliorant l'expérience globale du client."
+      }
+    ]
+  },
+  "benefits": {
+    "title": "LES BENEFICES D'OSEL",
+    "cards": [
+      {
+        "title": "Confiance accrue pour les clients",
+        "description": "Grâce à la prise de mensurations assistée, à la modélisation corporelle et à l'essayage virtuel, OSEL réduit les inquiétudes liées à l'achat vestimentaire à distance, renforçant la confiance du client."
+      },
+      {
+        "title": "Processus simplifié et sécurisé pour la diaspora",
+        "description": "OSEL formalise les commandes avec un cadre structuré, des informations transparentes, un paiement sécurisé et un suivi rigoureux, minimisant le risque financier et le stress logistique."
+      },
+      {
+        "title": "Visibilité et accès au marché international pour les artisans",
+        "description": "Les couturiers peuvent exposer leurs créations sur une vitrine numérique, renforcer leur crédibilité via les évaluations clients et atteindre une clientèle qu’ils ne pourraient toucher individuellement."
+      },
+      {
+        "title": "Réduction des erreurs et amélioration de la qualité",
+        "description": "Standardisation des mensurations, modèles clairs et processus de commande formalisé permettent aux artisans de travailler avec moins d'incertitudes, réduisant les retouches et optimisant le temps et les coûts."
+      }
+    ]
+  },
+  "techArtisan": {
+    "title": "Technologie et Artisanat",
+    "cards": [
+      {
+        "title": "Technologie Innovante",
+        "description": "OSEL utilise la capture de mensurations, la modélisation 3D et l’essayage virtuel pour améliorer la précision des commandes et la satisfaction des clients."
+      },
+      {
+        "title": "Savoir-faire Artisanal",
+        "description": "Les couturiers malgaches apportent leur expertise, créativité et tradition artisanale pour garantir des vêtements uniques, sur-mesure et de haute qualité."
+      }
+    ]
+  }, 
+  "footer": {
+    "title": "Rejoignez l'aventure OSEL",
+    "description": "Participez au développement de l’artisanat malgache et découvrez des créations uniques, sur-mesure et de haute qualité.",
+    "copyright": "Tous droits réservés."
+  }, 
+  "navbar": {
+    "home": "Accueil",
+    "interactions": "Interactions",
+    "benefits": "Bénéfices",
+    "techArtisan": "Relation"
+  }
+}

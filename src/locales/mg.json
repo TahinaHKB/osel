@@ -1,0 +1,71 @@
+{
+  "hero_title": "OSEL - Sehatra fanaovana akanjo araka ny habeny lavitra",
+  "hero_subtitle": "Ampifandraiso ny diaspora amin'ireo mpamorona eo an-toerana am-pahatokisana sy fiarovana.",
+  "hero_button": "Hahafantatra ny OSEL",
+  "interactions": {
+    "title": "Ahoana ny fomba itondran'ny OSEL ny fifandraisana",
+    "cards": [
+      {
+        "title": "Fampitana ny fampahalalana momba ny vatana",
+        "description": "Avy amin'ny fandrefesana vatana, voarindra tsara ny refy ary azo ampiasaina mivantana amin'ny mpanjaitra, mampihena ny lesoka amin'ny fanamboarana akanjo."
+      },
+      {
+        "title": "Fijerena sy fitafiana virtoaly",
+        "description": "Afaka mahita ny akanjony eo amin'ny avatar 3D ny mpanjifa alohan'ny hamitana ny baiko, mampitombo ny fahamendrehana sy ny fahafaham-po."
+      },
+      {
+        "title": "Fifanakalozana azo antoka",
+        "description": "Mampihena ny loza ara-bola sy ny fifandirana eo amin'ny diaspora sy ny mpanjaitra ny rafitra fandoavam-bola azo itokisana sy voarindra."
+      },
+      {
+        "title": "Fanarahana ny fandefasana amin'ny fomba mangarahara",
+        "description": "Arahin'ny fotoana tena izy ny fandefasana, mampihena ny tsy fahatokisana ary mampitombo ny traikefan'ny mpanjifa."
+      }
+    ]
+  }, 
+  "benefits": {
+    "title": "Tombontsoa avy amin'ny OSEL",
+    "cards": [
+      {
+        "title": "Fitokisana lehibe ho an'ny mpanjifa",
+        "description": "Miaraka amin'ny fandrefesana azo ampiasaina, modely vatana sy fitafiana virtoaly, mampihena ny ahiahy momba ny fividianana akanjo lavitra ny OSEL, mampitombo ny fitokisan'ny mpanjifa."
+      },
+      {
+        "title": "Dingana tsotra sy azo antoka ho an'ny diaspora",
+        "description": "Manamafy ny baiko amin'ny rafitra voarindra, fampahalalana mangarahara, fandoavam-bola azo antoka ary fanarahana hentitra ny OSEL, mampihena ny loza ara-bola sy ny adin-tsaina ara-logistika."
+      },
+      {
+        "title": "Fahitana sy fidirana amin'ny tsena iraisam-pirenena ho an'ny mpanjaitra",
+        "description": "Afaka mampiseho ny famoronany amin'ny sehatra nomerika ny mpanjaitra, manamafy ny laza amin'ny fanombanana avy amin'ny mpanjifa ary mahatratra mpanjifa tsy ho tratra tsirairay."
+      },
+      {
+        "title": "Fampihenana ny lesoka sy fanatsarana ny kalitao",
+        "description": "Amin'ny alalan'ny fandrefesana voarindra, modely mazava ary dingana baiko voarindra, afaka miasa amin'ny tsy fisian'ny tsy fahatokisana ny mpanjaitra, mampihena ny fanovana ary manatsara ny fotoana sy ny vidiny."
+      }
+    ]
+  }, 
+  "techArtisan": {
+    "title": "Teknolojia sy Asa Tanana",
+    "cards": [
+      {
+        "title": "Teknolojia Vaovao",
+        "description": "Mampiasa ny fakana refy vatana, modely 3D ary fitafiana virtoaly ny OSEL mba hanatsarana ny fahamarinan'ny baiko sy ny fahafaham-pon'ny mpanjifa."
+      },
+      {
+        "title": "Fahaiza-manaon'ny Mpanjaitra",
+        "description": "Mitondra ny fahaiza-manaony, ny famoronany ary ny fomba nentim-paharazana ny mpanjaitra Malagasy mba hahazoana akanjo tokana, vita manokana ary avo lenta."
+      }
+    ]
+  }, 
+  "footer": {
+    "title": "Miaraka amin'ny OSEL",
+    "description": "Mandray anjara amin'ny fampandrosoana ny asa tanana Malagasy ary mahita zavakanto tokana, vita manokana ary avo lenta.",
+    "copyright": "Zo rehetra voatokana."
+  }, 
+  "navbar": {
+    "home": "Fandraisana",
+    "interactions": "Fihetsiketsehana",
+    "benefits": "Tombontsoa",
+    "techArtisan": "Fifandraisana"
+  }
+}
