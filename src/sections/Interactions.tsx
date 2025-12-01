@@ -3,7 +3,6 @@ import { motion, type Variants } from "framer-motion";
 import { Users, Settings, Layers, Globe } from "lucide-react";
 import BgImage from "../assets/interractionImage.jpg";
 import Loading from "../components/Loading";
-import AnimatedSection from "../components/AnimatedSection";
 
 const interactionsData = [
   {
@@ -97,4 +96,5 @@ const InteractionsSection: React.FC = () => {
 };
 
 export default InteractionsSection;
+
 
