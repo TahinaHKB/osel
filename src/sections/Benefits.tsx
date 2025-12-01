@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { motion, type Variants } from "framer-motion";
 import BgImage from "../assets/beneficeImage.jpg";
 import Loading from "../components/Loading";
-import AnimatedSection from "../components/AnimatedSection";
 
 const benefits = [
   {
@@ -97,4 +96,5 @@ const BenefitsSection: React.FC = () => {
 };
 
 export default BenefitsSection;
+
 
