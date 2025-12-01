@@ -60,7 +60,6 @@ const InteractionsSection: React.FC = () => {
   if (!loaded) return <Loading />;
 
   return (
-    <AnimatedSection direction="left">
       <section
         id="interactions"
         className="relative py-20 bg-cover bg-center bg-no-repeat overflow-hidden"
@@ -94,8 +93,8 @@ const InteractionsSection: React.FC = () => {
           </div>
         </div>
       </section>
-    </AnimatedSection>
   );
 };
 
 export default InteractionsSection;
+
