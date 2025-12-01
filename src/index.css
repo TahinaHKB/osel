@@ -10,3 +10,7 @@
 .animate-fadeIn {
   animation: fadeIn 0.3s ease-out forwards;
 }
+
+body {
+  @apply bg-gradient-to-tr from-purple-500 via-purple-600 to-indigo-700;
+}

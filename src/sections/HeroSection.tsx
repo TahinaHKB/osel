@@ -29,14 +29,14 @@ const HeroSection: React.FC = () => {
           OSEL - La plateforme du sur-mesure à distance
         </h1>
         <p className="text-lg md:text-2xl mb-8">
-          Connectez la diaspora malgache aux artisans locaux avec confiance et
+          Connectez la diaspora aux artisans locaux avec confiance et
           sécurité.
         </p>
         <ScrollLink
-          to="benefits" // l'id ou le name de ta section cible
-          smooth={true} // scroll smooth
-          duration={500} // durée en ms
-          offset={-70} // pour compenser la navbar si fixe
+          to="interactions" 
+          smooth={true} 
+          duration={500} 
+          offset={-70} 
           className="inline-block bg-white text-purple-700 font-semibold px-6 py-3 rounded-lg shadow-lg hover:bg-gray-100 transition cursor-pointer"
         >
           Découvrir OSEL
