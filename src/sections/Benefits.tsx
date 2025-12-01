@@ -56,7 +56,6 @@ const BenefitsSection: React.FC = () => {
   if (!loaded) return <Loading />;
 
   return (
-    <AnimatedSection direction="right">
       <section
         id="benefits"
         className="relative py-20 bg-cover bg-center bg-no-repeat"
@@ -94,8 +93,8 @@ const BenefitsSection: React.FC = () => {
           </div>
         </div>
       </section>
-    </AnimatedSection>
   );
 };
 
 export default BenefitsSection;
+
