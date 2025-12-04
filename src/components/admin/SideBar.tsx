@@ -1,41 +1,53 @@
-import { Home, Users, Settings, Mail } from "lucide-react";
-import { Link } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate("/"); // redirige vers login
+    } catch (error) {
+      console.error("Erreur lors de la déconnexion :", error);
+    }
+  };
+
+  const menuItems = [
+    { id: "1", label: "Dashboard" },
+    { id: "2", label: "Emails" },
+    { id: "3", label: "Questionnaires" },
+  ];
+
   return (
-    <aside className="w-64 bg-purple-700 text-white h-screen fixed top-0 left-0 p-6 hidden md:block">
-      <h2 className="text-3xl font-bold mb-10">Admin</h2>
+    <div className="hidden md:flex w-64 bg-purple-700 text-white h-screen flex-col fixed">
+      <div className="p-6 text-2xl font-bold">Admin</div>
 
-      <nav className="space-y-6">
-        <Link
-          to="/admin"
-          className="flex items-center gap-3 hover:text-gray-200 text-lg"
-        >
-          <Home /> Dashboard
-        </Link>
+      <nav className="flex flex-col space-y-2 px-4">
+        {menuItems.map((item) => (
+          <NavLink
+            key={item.id}
+            to={`/admin/${item.id}`}
+            className={({ isActive }) =>
+              `px-4 py-2 rounded hover:bg-purple-600 transition ${
+                isActive ? "bg-purple-800 font-bold" : ""
+              }`
+            }
+          >
+            {item.label}
+          </NavLink>
+        ))}
 
-        <Link
-          to="/admin/users"
-          className="flex items-center gap-3 hover:text-gray-200 text-lg"
+        {/* Bouton de déconnexion */}
+        <button
+          onClick={handleLogout}
+          className="mt-6 px-4 py-2 bg-red-500 rounded hover:bg-red-600 transition"
         >
-          <Users /> Inscriptions
-        </Link>
-
-        <Link
-          to="/admin/questions"
-          className="flex items-center gap-3 hover:text-gray-200 text-lg"
-        >
-          <Settings /> Questions
-        </Link>
-
-        <Link
-          to="/admin/emails"
-          className="flex items-center gap-3 hover:text-gray-200 text-lg"
-        >
-          <Mail /> Emails
-        </Link>
+          Déconnexion
+        </button>
       </nav>
-    </aside>
+    </div>
   );
 };
 

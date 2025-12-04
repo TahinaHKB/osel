@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link as ScrollLink } from "react-scroll";
+import {Link as ScrollLink } from "react-scroll";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import BgImage from "../assets/header.jpg";
 import Loading from "../components/Loading";
@@ -30,9 +31,7 @@ const HeroSection: React.FC = () => {
         <h1 className="text-4xl md:text-6xl font-bold mb-6">
           {t("hero_title")}
         </h1>
-        <p className="text-lg md:text-2xl mb-8">
-          {t("hero_subtitle")}
-        </p>
+        <p className="text-lg md:text-2xl mb-8">{t("hero_subtitle")}</p>
         <ScrollLink
           to="interactions"
           smooth={true}
@@ -42,6 +41,14 @@ const HeroSection: React.FC = () => {
         >
           {t("hero_button")}
         </ScrollLink>
+        <div className="mt-6">
+          <Link
+            to="/question"
+            className="inline-block bg-white text-purple-700 font-semibold px-6 py-3 rounded-lg shadow-lg hover:bg-gray-100 transition cursor-pointer"
+          >
+            Remplir le questionnaire
+          </Link>
+        </div>
       </div>
 
       {/* Flèche d’animation */}
