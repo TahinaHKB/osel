@@ -7,12 +7,13 @@ interface Question {
   id: string;
   text: string;
   options: string[];
+  multi: boolean;
 }
 
 const VisitorQuestionnaire = () => {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [email, setEmail] = useState("");
-  const [answers, setAnswers] = useState<{ [key: string]: string }>({});
+  const [answers, setAnswers] = useState<{ [key: string]: string | string[] }>({});
   const [success, setSuccess] = useState(false);
 
   const navigate = useNavigate();
@@ -31,19 +32,42 @@ const VisitorQuestionnaire = () => {
         id: key,
         text: data[key].text,
         options: data[key].options,
+        multi: data[key].multi ?? false,
       }));
 
       setQuestions(list);
     });
   }, []);
 
-  const handleAnswerChange = (questionId: string, option: string) => {
+  // === Gestion réponses ===
+  const handleSingleAnswer = (questionId: string, option: string) => {
     setAnswers((prev) => ({
       ...prev,
       [questionId]: option,
     }));
   };
 
+  const handleMultiAnswer = (questionId: string, option: string) => {
+    setAnswers((prev) => {
+      const current = prev[questionId] || [];
+
+      if (!Array.isArray(current)) return prev;
+
+      if (current.includes(option)) {
+        return {
+          ...prev,
+          [questionId]: current.filter((o) => o !== option),
+        };
+      } else {
+        return {
+          ...prev,
+          [questionId]: [...current, option],
+        };
+      }
+    });
+  };
+
+  // === Envoi du questionnaire ===
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -52,9 +76,14 @@ const VisitorQuestionnaire = () => {
       return;
     }
 
-    // Vérifier que toutes les questions sont répondues
     for (let q of questions) {
-      if (!answers[q.id]) {
+      const ans = answers[q.id];
+      const empty =
+        ans === undefined ||
+        ans === "" ||
+        (Array.isArray(ans) && ans.length === 0);
+
+      if (empty) {
         alert(`Veuillez répondre à : "${q.text}"`);
         return;
       }
@@ -62,6 +91,7 @@ const VisitorQuestionnaire = () => {
 
     try {
       const emailKey = email.replace(/\./g, ",");
+
       await set(ref(db, `responses/${emailKey}`), answers);
 
       setSuccess(true);
@@ -72,6 +102,15 @@ const VisitorQuestionnaire = () => {
       alert("Erreur lors de l'enregistrement");
     }
   };
+
+  // === Progression ===
+  const total = questions.length;
+  const answered = Object.values(answers).filter((a) => {
+    if (Array.isArray(a)) return a.length > 0;
+    return a !== "" && a !== undefined;
+  }).length;
+
+  const progressPercent = total > 0 ? Math.round((answered / total) * 100) : 0;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
@@ -89,19 +128,29 @@ const VisitorQuestionnaire = () => {
           </button>
         </div>
 
-        {/* TEXTE INTRO */}
+        {/* ProgressBar */}
+        <div className="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+          <div
+            className="bg-purple-600 h-full transition-all duration-300"
+            style={{ width: `${progressPercent}%` }}
+          ></div>
+        </div>
+
+        <p className="text-right text-sm text-gray-600">
+          {progressPercent}% complété
+        </p>
+
+        {/* Intro */}
         <div className="text-gray-700 text-sm md:text-base leading-relaxed">
-          Ce questionnaire s’inscrit dans une étude visant à évaluer la faisabilité de l’application OSEL, une future plateforme permettant aux Malgaches de la diaspora de commander des vêtements sur mesure à Madagascar, à distance, de manière simple et fiable.
-          <br /><br />
-          OSEL proposera notamment :
-          <ul className="list-disc list-inside ml-4 mt-2 space-y-1">
-            <li>Un scan corporel pour obtenir vos mensurations avec le téléphone</li>
-            <li>Un essayage virtuel sur un avatar personnalisé</li>
-            <li>Une sélection de couturiers selon leur style et leurs avis</li>
-            <li>Un paiement sécurisé et un suivi jusqu’à la livraison internationale</li>
+          Ce questionnaire s’inscrit dans une étude visant à évaluer la faisabilité de l’application OSEL...
+          <ul className="list-disc list-inside ml-4 mt-2">
+            <li>Un scan corporel</li>
+            <li>Un essayage virtuel</li>
+            <li>Un choix de couturiers</li>
+            <li>Un paiement sécurisé</li>
           </ul>
           <br />
-          Vos réponses resteront anonymes et serviront exclusivement à adapter OSEL aux besoins réels de la diaspora malgache.
+          Vos réponses resteront anonymes.
         </div>
 
         {success && (
@@ -118,33 +167,46 @@ const VisitorQuestionnaire = () => {
             <label className="block mb-1 font-medium">Email :</label>
             <input
               type="email"
-              className="border p-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-purple-700"
+              className="border p-3 w-full rounded focus:ring-2 focus:ring-purple-700"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
 
-          {/* QUESTIONS AVEC RADIO */}
+          {/* QUESTIONS */}
           {questions.map((q) => (
             <div key={q.id} className="p-4 border rounded-lg bg-gray-50">
               <p className="font-semibold mb-3">{q.text}</p>
 
               <div className="space-y-2">
                 {q.options.map((opt, idx) => (
-                  <label
-                    key={idx}
-                    className="flex items-center space-x-3 cursor-pointer"
-                  >
-                    <input
-                      type="radio"
-                      name={q.id}
-                      value={opt}
-                      checked={answers[q.id] === opt}
-                      onChange={() => handleAnswerChange(q.id, opt)}
-                      className="h-4 w-4 text-purple-700"
-                      required
-                    />
+                  <label key={idx} className="flex items-center space-x-3 cursor-pointer">
+
+                    {/* SINGLE */}
+                    {!q.multi && (
+                      <input
+                        type="radio"
+                        name={q.id}
+                        value={opt}
+                        checked={answers[q.id] === opt}
+                        onChange={() => handleSingleAnswer(q.id, opt)}
+                        className="h-4 w-4 text-purple-700"
+                        required
+                      />
+                    )}
+
+                    {/* MULTI */}
+                    {q.multi && (
+                      <input
+                        type="checkbox"
+                        value={opt}
+                        checked={Array.isArray(answers[q.id]) && answers[q.id].includes(opt)}
+                        onChange={() => handleMultiAnswer(q.id, opt)}
+                        className="h-5 w-5 text-purple-700"
+                      />
+                    )}
+
                     <span className="text-gray-800">{opt}</span>
                   </label>
                 ))}
