@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { db } from "../../firebase";
-import { ref, set, push, onValue, remove, update } from "firebase/database";
+import { ref, set, push, onValue, remove } from "firebase/database";
 import { Trash2 } from "lucide-react";
+import EditQuestionModal from "../../components/admin/EditQuestionModal";
 
 interface Question {
   id: string;
@@ -16,6 +17,8 @@ const Questionnaire = () => {
   const [newText, setNewText] = useState("");
   const [newOptions, setNewOptions] = useState([""]);
   const [newMulti, setNewMulti] = useState(false);
+
+  const [editingQuestion, setEditingQuestion] = useState<Question | null>(null);
 
   // === Récupérer questions ===
   useEffect(() => {
@@ -71,12 +74,6 @@ const Questionnaire = () => {
   const deleteQuestion = async (id: string) => {
     if (!window.confirm("Supprimer cette question ?")) return;
     await remove(ref(db, `questions/${id}`));
-  };
-
-  // === Modifier multi pour une question existante ===
-  const toggleMulti = async (q: Question) => {
-    const qRef = ref(db, `questions/${q.id}`);
-    await update(qRef, { multi: !q.multi });
   };
 
   return (
@@ -165,16 +162,13 @@ const Questionnaire = () => {
             </div>
 
             <div className="flex flex-col gap-2 mt-3 md:mt-0">
-
-              {/* Toggle multi */}
               <button
-                onClick={() => toggleMulti(q)}
-                className="px-4 py-1 rounded bg-yellow-500 text-white hover:bg-yellow-600"
+                onClick={() => setEditingQuestion(q)}
+                className="px-4 py-1 rounded bg-purple-600 text-white hover:bg-purple-700"
               >
-                Basculer multi
+                Modifier
               </button>
 
-              {/* Delete */}
               <button
                 onClick={() => deleteQuestion(q.id)}
                 className="text-red-600 hover:text-red-800 flex items-center gap-1"
@@ -185,6 +179,12 @@ const Questionnaire = () => {
           </div>
         ))}
       </div>
+      {editingQuestion && (
+        <EditQuestionModal
+          question={editingQuestion}
+          onClose={() => setEditingQuestion(null)}
+        />
+      )}
     </div>
   );
 };
