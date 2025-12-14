@@ -93,6 +93,7 @@ const VisitorQuestionnaire = () => {
       console.error(err);
       alert("Erreur lors de l'enregistrement");
     }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   /* =======================
@@ -224,3 +225,4 @@ const VisitorQuestionnaire = () => {
 };
 
 export default VisitorQuestionnaire;
+
