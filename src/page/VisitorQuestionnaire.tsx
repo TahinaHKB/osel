@@ -166,7 +166,7 @@ const VisitorQuestionnaire = () => {
             {/* EMAIL */}
             <div>
               <label className="block mb-1 font-medium">
-                Email de pre-inscription :
+                Email de préscription :
               </label>
               <input
                 type="email"
@@ -224,4 +224,3 @@ const VisitorQuestionnaire = () => {
 };
 
 export default VisitorQuestionnaire;
-

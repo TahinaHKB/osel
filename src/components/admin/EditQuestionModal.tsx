@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { db } from "../../firebase";
-import { ref, update } from "firebase/database";
+import { ref, update, get } from "firebase/database";
 
 interface Question {
   id: string;
@@ -20,9 +20,7 @@ const EditQuestionModal: React.FC<Props> = ({ question, onClose }) => {
   const [multi, setMulti] = useState(question.multi);
   const [saving, setSaving] = useState(false);
 
-  /* ===============================
-     BLOQUER SCROLL DU SITE
-  =============================== */
+  // === Bloquer scroll du site ===
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
@@ -30,22 +28,60 @@ const EditQuestionModal: React.FC<Props> = ({ question, onClose }) => {
     };
   }, []);
 
-  /* ===============================
-     OPTIONS
-  =============================== */
+  // === OPTIONS ===
   const handleOptionChange = (i: number, value: string) => {
-    const copy = [...options];
-    copy[i] = value;
-    setOptions(copy);
+    setOptions((prev) => {
+      const copy = [...prev];
+      copy[i] = value;
+      return copy;
+    });
   };
 
   const addOption = () => setOptions([...options, ""]);
   const removeOption = (i: number) =>
     setOptions(options.filter((_, idx) => idx !== i));
 
-  /* ===============================
-     SAVE
-  =============================== */
+  // === METTRE À JOUR LES RÉPONSES EXISTANTES ===
+  const updateResponsesForOptionChange = async (
+    questionId: string,
+    oldOptions: string[],
+    newOptions: string[],
+    isMulti: boolean
+  ) => {
+    const responsesRef = ref(db, "responses");
+    const snapshot = await get(responsesRef);
+    if (!snapshot.exists()) return;
+
+    const data = snapshot.val();
+    const updates: any = {};
+
+    Object.keys(data).forEach((email) => {
+      const answer = data[email]?.[questionId];
+
+      // Single answer
+      if (!isMulti && typeof answer === "string") {
+        const idx = oldOptions.indexOf(answer);
+        if (idx !== -1) {
+          updates[`responses/${email}/${questionId}`] = newOptions[idx];
+        }
+      }
+
+      // Multi answer
+      if (isMulti && Array.isArray(answer)) {
+        const newAnswer = answer.map((a: string) => {
+          const idx = oldOptions.indexOf(a);
+          return idx !== -1 ? newOptions[idx] : a;
+        });
+        updates[`responses/${email}/${questionId}`] = newAnswer;
+      }
+    });
+
+    if (Object.keys(updates).length > 0) {
+      await update(ref(db), updates);
+    }
+  };
+
+  // === SAVE ===
   const saveChanges = async () => {
     if (!text.trim() || options.some((o) => !o.trim())) {
       alert("Question et options obligatoires");
@@ -53,11 +89,21 @@ const EditQuestionModal: React.FC<Props> = ({ question, onClose }) => {
     }
 
     setSaving(true);
+
+    // Mettre à jour les réponses existantes si les options ont changé
+    const oldOptions = question.options;
+    const newOptions = options;
+    if (JSON.stringify(oldOptions) !== JSON.stringify(newOptions)) {
+      await updateResponsesForOptionChange(question.id, oldOptions, newOptions, multi);
+    }
+
+    // Mettre à jour la question
     await update(ref(db, `questions/${question.id}`), {
       text,
       options,
       multi,
     });
+
     setSaving(false);
     onClose();
   };
